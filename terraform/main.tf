@@ -6,13 +6,13 @@ terraform {
   }
 
   backend "s3" {
-    region = var.primary_region
+    region = var.region
     key    = "terraform.tfstate"
   }
 }
 
 provider "aws" {
-  region = var.primary_region
+  region = var.region
 }
 
 resource "aws_instance" "test_instance" {
