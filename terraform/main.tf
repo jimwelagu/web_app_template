@@ -6,13 +6,13 @@ terraform {
   }
 
   backend "s3" {
-    region = "us-west-2"
+    region = var.primary_region
     key    = "terraform.tfstate"
   }
 }
 
 provider "aws" {
-  region = "us-west-2"
+  region = var.primary_region
 }
 
 resource "aws_instance" "test_instance" {
@@ -22,3 +22,8 @@ resource "aws_instance" "test_instance" {
     Name = "test_instance"
   }
 }
+
+# module "appsync_api" {
+#   source = "./modules"
+#   region = var.reg
+# }
