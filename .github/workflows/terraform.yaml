@@ -1,10 +1,10 @@
-name: "Terraform Infrastructure Change Management Pipeline with GitHub Actions"
+name: "Terraform deploy"
  
-on: push
-# on:
-#  push:
-#    branches:
-#    - main
+# on: push
+on:
+ push:
+   branches:
+   - main
 #    paths:
 #    - terraform/**
 #  pull_request:
