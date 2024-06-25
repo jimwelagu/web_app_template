@@ -6,7 +6,7 @@ terraform {
   }
 
   backend "s3" {
-    region = var.region
+    region = "us-west-2"
     key    = "terraform.tfstate"
   }
 }
