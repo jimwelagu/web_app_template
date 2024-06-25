@@ -1,16 +1,16 @@
-terraform {
-  backend "s3" {
-    bucket                  = "terraform-s3-state-2024"
-    key                     = "web_app_template"
-    region                  = "us-west-2"
-    # shared_credentials_file = "~/.aws/credentials"
-  }
-}
+# terraform {
+#   backend "s3" {
+#     bucket                  = "terraform-s3-state-2024"
+#     key                     = "web_app_template"
+#     region                  = "us-west-2"
+#     # shared_credentials_file = "~/.aws/credentials"
+#   }
+# }
 
-provider "aws" {
-  region                  = "us-west-2"
-#   shared_credentials_file = "~/.aws/credentials"
-}
+# provider "aws" {
+#   region                  = "us-west-2"
+# #   shared_credentials_file = "~/.aws/credentials"
+# }
 
 terraform {
  required_providers {
