@@ -19,10 +19,16 @@ jobs:
   build:
     name: "Build Functions"
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash
+        # We keep Script files in the scripts directory.
+        working-directory: ./scripts
     steps:
-      - run: ./package.sh
+      run: . package.sh
 
   terraform:
+    needs: build
     name: "Terraform"
     runs-on: ubuntu-latest
     defaults:
