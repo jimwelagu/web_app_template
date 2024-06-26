@@ -5,14 +5,6 @@ on:
   push:
     branches:
       - main
-#    paths:
-#    - terraform/**
-#  pull_request:
-#    branches:
-#    - main
-#    paths:
-#    - terraform/**
-# on: [push]
 
 env:
   # verbosity setting for Terraform logs
@@ -24,6 +16,12 @@ env:
   BUCKET_TF_STATE: ${{ secrets.BUCKET_TF_STATE}}
 
 jobs:
+  build:
+    name: "Build Functions"
+    runs-on: ubuntu-latest
+    steps:
+      - run: package.sh
+
   terraform:
     name: "Terraform"
     runs-on: ubuntu-latest
