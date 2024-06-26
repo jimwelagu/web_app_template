@@ -25,7 +25,8 @@ jobs:
         # We keep Script files in the scripts directory.
         working-directory: ./scripts
     steps:
-      run: . package.sh
+      - name: package
+        run: . package.sh
 
   terraform:
     needs: build
