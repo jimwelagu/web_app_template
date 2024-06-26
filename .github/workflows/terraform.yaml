@@ -26,7 +26,7 @@ jobs:
         working-directory: ./scripts
     steps:
       - name: package
-        run: . package.sh
+        run: package.sh
 
   terraform:
     needs: build
