@@ -32,7 +32,7 @@ jobs:
       - name: ls
         run: ls
       - name: package
-        run: package.sh
+        run: . package.sh
 
   terraform:
     needs: build
