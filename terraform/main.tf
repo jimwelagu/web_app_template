@@ -27,4 +27,5 @@ module "appsync_api" {
   source      = "./modules/appsync_api"
   region      = var.region
   schema_path = abspath("../schema.graphql")
+  get_task_resolver = abspath("../resolvers/getTasks.js")
 }

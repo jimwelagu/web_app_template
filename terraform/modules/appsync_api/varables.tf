@@ -4,6 +4,9 @@ variable "region" {
 }
 
 variable "schema_path" {
-  description = "The AWS region"
+  type        = string
+}
+
+variable "get_task_resolver" {
   type        = string
 }

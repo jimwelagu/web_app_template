@@ -182,7 +182,7 @@ resource "aws_appsync_resolver" "get_tasks_resolver" {
     name            = "APPSYNC_JS"
     runtime_version = "1.0.0"
   }
-  code        = file(abspath("../../../resolvers/getTasks.js"))
+  code        = file(var.get_task_resolver)
   data_source = aws_appsync_datasource.tasks_table_datasource.name
 }
 
