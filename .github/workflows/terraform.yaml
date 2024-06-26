@@ -27,6 +27,8 @@ jobs:
     steps:
       - name: Checkout the repository to the runner
         uses: actions/checkout@v2
+      - name: echo
+        run: pwd
       - name: package
         run: package.sh
 
