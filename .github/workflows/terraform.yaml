@@ -37,7 +37,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: add_task_lambda
-          retention-days: 5
+          retention-days: 1
           path: |
             add_task_lambda_function.zip
 
