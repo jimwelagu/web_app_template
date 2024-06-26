@@ -24,7 +24,7 @@ resource "aws_instance" "test_instance" {
 }
 
 module "appsync_api" {
-  source = "./modules/appsync_api"
-  region = var.region
+  source      = "./modules/appsync_api"
+  region      = var.region
   schema_path = abspath("../schema.graphql")
 }
