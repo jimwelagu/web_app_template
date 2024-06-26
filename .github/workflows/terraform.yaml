@@ -23,7 +23,7 @@ jobs:
       run:
         shell: bash
         # We keep Script files in the scripts directory.
-        working-directory: scripts
+        working-directory: ./scripts
     steps:
       - name: Checkout the repository to the runner
         uses: actions/checkout@v2
