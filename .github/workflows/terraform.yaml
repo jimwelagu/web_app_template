@@ -20,7 +20,7 @@ jobs:
     name: "Build Functions"
     runs-on: ubuntu-latest
     steps:
-      - run: package.sh
+      - run: ./package.sh
 
   terraform:
     name: "Terraform"
