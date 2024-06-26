@@ -24,6 +24,6 @@ resource "aws_instance" "test_instance" {
 }
 
 module "appsync_api" {
-  source = "./modules"
+  source = "./modules/appsync_api"
   region = var.region
 }
