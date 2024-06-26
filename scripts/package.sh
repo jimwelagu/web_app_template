@@ -3,7 +3,9 @@
 WORKDIR=$(pwd)/..
 
 cd ${WORKDIR}/functions/addTask
+echo "installing packages"
 npm install
+echo "buiilding"
 npm run build
 mkdir dist
 cp -r ./*.js dist/
