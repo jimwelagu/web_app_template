@@ -40,6 +40,7 @@ jobs:
           retention-days: 1
           path: |
             add_task_lambda_function.zip
+            post_confirmation_lambda_function.zip
             dist
 
   terraform:
@@ -58,6 +59,12 @@ jobs:
 
       - name: Download Functions
         uses: actions/download-artifact@v4
+
+      - name: pwd
+        run: pwd
+
+      - name: ls
+        run: ls
 
       - name: Setup Terraform with specified version on the runner
         uses: hashicorp/setup-terraform@v2
