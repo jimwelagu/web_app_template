@@ -36,7 +36,8 @@ jobs:
       - name: upload
         uses: actions/upload-artifact@v4
         with:
-          name: archive
+          name: add_task_lambda
+          retention-days: 5
           path: |
             add_task_lambda_function.zip
 
@@ -53,6 +54,9 @@ jobs:
     steps:
       - name: Checkout the repository to the runner
         uses: actions/checkout@v4
+
+      - name: Download Functions
+        uses: actions/upload-artifact@v4
 
       - name: Setup Terraform with specified version on the runner
         uses: hashicorp/setup-terraform@v2

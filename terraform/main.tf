@@ -23,7 +23,7 @@ resource "aws_instance" "test_instance" {
   }
 }
 
-# module "appsync_api" {
-#   source = "./modules"
-#   region = var.reg
-# }
+module "appsync_api" {
+  source = "./modules"
+  region = var.reg
+}
