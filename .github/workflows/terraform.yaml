@@ -33,6 +33,12 @@ jobs:
         run: ls
       - name: package
         run: . package.sh
+      - name: upload
+        uses: actions/upload-artifact@v4
+        with:
+          name: archive
+          path: |
+            add_task_lambda_function.zip
 
   terraform:
     needs: build
