@@ -13,7 +13,7 @@ mkdir dist
 cp -r ./*.js dist/
 cp -r ./node_modules dist/
 cd dist
-zip -r ${WORKDIR}/add_task_lambda_function.zip .
+zip -r ${WORKDIR}/../add_task_lambda_function.zip .
 
 cd ${WORKDIR}/functions/postConfirmation
 echo "installing packages"
@@ -26,5 +26,5 @@ mkdir dist
 cp -r ./*.js dist/
 cp -r ./node_modules dist/
 cd dist
-zip -r ${WORKDIR}/post_confirmation_lambda_function.zip .
+zip -r ${WORKDIR}/../post_confirmation_lambda_function.zip .
 
