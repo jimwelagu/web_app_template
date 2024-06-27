@@ -27,7 +27,7 @@ module "appsync_api" {
   source                = "./modules/appsync_api"
   region                = var.region
   schema_path           = abspath("../schema.graphql")
-  get_task_resolver     = abspath("../resolvers/getTasks.js")
+  get_task_resolver     = abspath("../server/resolvers/getTasks.js")
   add_task_zip          = abspath("../built_functions/add_task_lambda_function.zip")
   post_confirmation_zip = abspath("../built_functions/post_confirmation_lambda_function.zip")
 }
