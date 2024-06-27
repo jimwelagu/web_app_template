@@ -109,7 +109,8 @@ resource "aws_iam_role" "lambda_execution_role" {
 
 resource "aws_lambda_function" "add_task_lambda_function" {
   function_name = "addTaskLambdaFunction"
-  filename      = "add_task_lambda_function.zip"
+  filename      = var.add_task_zip
+
   role          = aws_iam_role.lambda_execution_role.arn
   handler       = "index.addTask"
   runtime       = "nodejs20.x"
@@ -205,7 +206,7 @@ resource "aws_appsync_resolver" "add_task_resolver" {
 
 resource "aws_lambda_function" "post_confirmation_lambda_function" {
   function_name = "postConfirmationLambdaFunction"
-  filename      = "post_confirmation_lambda_function.zip"
+  filename      = var.post_confirmation_zip
   role          = aws_iam_role.lambda_execution_role.arn
   handler       = "index.postConfirmation"
   runtime       = "nodejs20.x"
