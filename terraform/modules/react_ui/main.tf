@@ -48,7 +48,7 @@ module "cloudfront" {
   origin = {
     s3 = {
       domain_name = module.s3_bucket.s3_bucket_bucket_regional_domain_name
-      origin_id   = var.b
+      origin_id   = var.bucket_name
       origin_access_control = "s3" 
     }
   }
