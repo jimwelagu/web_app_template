@@ -24,10 +24,10 @@ resource "aws_instance" "test_instance" {
 }
 
 module "appsync_api" {
-  source            = "./modules/appsync_api"
-  region            = var.region
-  schema_path       = abspath("../schema.graphql")
-  get_task_resolver = abspath("../resolvers/getTasks.js")
-  add_task_zip = abspath("../add_task_lambda_function.zip")
+  source                = "./modules/appsync_api"
+  region                = var.region
+  schema_path           = abspath("../schema.graphql")
+  get_task_resolver     = abspath("../resolvers/getTasks.js")
+  add_task_zip          = abspath("../add_task_lambda_function.zip")
   post_confirmation_zip = abspath("../post_confirmation_lambda_function.zip")
 }
