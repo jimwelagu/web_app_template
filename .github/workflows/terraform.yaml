@@ -29,19 +29,21 @@ jobs:
         uses: actions/checkout@v4
       - name: pwd
         run: pwd
-      - name: ls
+      - name: ls before
         run: ls
       - name: package
         run: . package.sh
       - name: upload
         uses: actions/upload-artifact@v4
         with:
-          name: add_task_lambda
+          name: built_functions
           retention-days: 1
           path: |
             add_task_lambda_function.zip
             post_confirmation_lambda_function.zip
             dist
+      - name: ls after
+        run: ls
 
   terraform:
     needs: build
@@ -64,7 +66,7 @@ jobs:
         run: pwd
 
       - name: ls
-        run: ls ../
+        run: ls ../built_functions/
 
       - name: Setup Terraform with specified version on the runner
         uses: hashicorp/setup-terraform@v2
