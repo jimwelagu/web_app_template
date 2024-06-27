@@ -3,8 +3,8 @@ name: "Build and Deploy"
 # on: push
 on:
   push:
-    branches:
-      - main
+    # branches:
+    #   - main
 
 env:
   # verbosity setting for Terraform logs

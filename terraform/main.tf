@@ -15,14 +15,6 @@ provider "aws" {
   region = var.region
 }
 
-resource "aws_instance" "test_instance" {
-  ami           = "ami-830c94e3"
-  instance_type = "t2.nano"
-  tags = {
-    Name = "test_instance"
-  }
-}
-
 module "appsync_api" {
   source                = "./modules/appsync_api"
   region                = var.region
@@ -30,4 +22,10 @@ module "appsync_api" {
   get_task_resolver     = abspath("../server/resolvers/getTasks.js")
   add_task_zip          = abspath("../built_functions/add_task_lambda_function.zip")
   post_confirmation_zip = abspath("../built_functions/post_confirmation_lambda_function.zip")
+}
+
+module "name" {
+  source      = "./modules/react_ui"
+  region      = var.region
+  bucket_name = "${var.region}-new-gql-client"
 }
