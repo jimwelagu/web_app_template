@@ -63,7 +63,7 @@ jobs:
       - name: package
         run: . scripts/package.sh
       - name: ls after
-        run: ls
+        run: ls ./build
       - name: change dir
         run: cd
       - name: upload
