@@ -61,7 +61,7 @@ jobs:
       - name: ls before
         run: ls
       - name: package
-        run: . package_client.sh
+        run: . package.sh
       - name: upload
         uses: actions/upload-artifact@v4
         with:
@@ -73,7 +73,7 @@ jobs:
         run: ls
 
   terraform:
-    needs: build_server
+    needs: [build_server build_client]
     name: "Terraform"
     runs-on: ubuntu-latest
     defaults:
