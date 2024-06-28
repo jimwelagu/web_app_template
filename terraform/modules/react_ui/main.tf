@@ -1,16 +1,25 @@
+data "aws_caller_identity" "current" {}
+
 # Create s3 bucket using s3-bucket module 
 module "s3_bucket" {
   source = "terraform-aws-modules/s3-bucket/aws"
+  version = "3.15.1"
 
   bucket = var.bucket_name
-  acl    = "public-read"
 
   versioning = {
     enabled = true
   }
 
+  block_public_acls       = false
+  block_public_policy     = false
+  ignore_public_acls      = false
+  restrict_public_buckets = false
+
   control_object_ownership = true
-  object_ownership         = "ObjectWriter"
+  object_ownership         = "BucketOwnerPreferred"
+  expected_bucket_owner    = data.aws_caller_identity.current.account_id
+  acl                      = "public-read"
 
   # allow cloudfront access to the bucket
   attach_policy = true
