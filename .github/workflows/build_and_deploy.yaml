@@ -70,7 +70,7 @@ jobs:
           name: built_client
           retention-days: 1
           path: |
-            build/
+            build/*
 
   terraform:
     needs: [build_server, build_client]
