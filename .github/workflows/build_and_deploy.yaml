@@ -65,14 +65,14 @@ jobs:
       - name: ls after
         run: ls ../
       - name: change dir
-        run: cd ../src
+        run: cd ../
       - name: upload
         uses: actions/upload-artifact@v4
         with:
           name: built_client
           retention-days: 1
           path: |
-            dist
+            build
 
   terraform:
     needs: [build_server, build_client]
