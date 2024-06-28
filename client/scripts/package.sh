@@ -11,7 +11,8 @@ echo "buiilding"
 npm run build
 ls
 mkdir dist
-# cp -r ./*.js dist/
-# cp -r ./node_modules dist/
+cp -r ./*.js dist/
+cp -r ./*.css dist/
+cp -r ./*.svg dist/
 # cd dist
 # zip -r ${WORKDIR}/../add_task_lambda_function.zip .

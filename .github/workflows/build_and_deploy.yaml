@@ -68,7 +68,7 @@ jobs:
           name: built_client
           retention-days: 1
           path: |
-            build
+            dist
       - name: ls after
         run: ls
 
