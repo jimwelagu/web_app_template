@@ -42,6 +42,7 @@ jobs:
             add_task_lambda_function.zip
             post_confirmation_lambda_function.zip
             dist
+          if-no-files-found: error # 'warn' or 'ignore' are also available, defaults to `warn`
       - name: ls after
         run: ls
 
@@ -69,8 +70,8 @@ jobs:
         with:
           name: built_client
           retention-days: 1
-          path: |
-            ./build/*
+          path: build/
+          if-no-files-found: error # 'warn' or 'ignore' are also available, defaults to `warn`
 
   terraform:
     needs: [build_server, build_client]
