@@ -59,7 +59,7 @@ jobs:
       - name: pwd
         run: pwd
       - name: ls before
-        run: ls
+        run: ls ../
       - name: package
         run: . package.sh
       - name: upload
@@ -68,7 +68,7 @@ jobs:
           name: built_client
           retention-days: 1
           path: |
-            dist
+            ../src/dist
       - name: ls after
         run: ls
 
