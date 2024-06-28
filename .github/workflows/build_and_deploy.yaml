@@ -16,8 +16,8 @@ env:
   BUCKET_TF_STATE: ${{ secrets.BUCKET_TF_STATE}}
 
 jobs:
-  build:
-    name: "Build Functions"
+  build_server:
+    name: "Build Server"
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -36,7 +36,7 @@ jobs:
       - name: upload
         uses: actions/upload-artifact@v4
         with:
-          name: built_functions
+          name: built_server
           retention-days: 1
           path: |
             add_task_lambda_function.zip
@@ -45,8 +45,35 @@ jobs:
       - name: ls after
         run: ls
 
+  build_client:
+    name: "Build Client"
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash
+        # We keep Script files in the scripts directory.
+        working-directory: ./client/scripts
+    steps:
+      - name: Checkout the repository to the runner
+        uses: actions/checkout@v4
+      - name: pwd
+        run: pwd
+      - name: ls before
+        run: ls
+      - name: package
+        run: . package_client.sh
+      - name: upload
+        uses: actions/upload-artifact@v4
+        with:
+          name: built_client
+          retention-days: 1
+          path: |
+            build
+      - name: ls after
+        run: ls
+
   terraform:
-    needs: build
+    needs: build_server
     name: "Terraform"
     runs-on: ubuntu-latest
     defaults:
@@ -66,7 +93,7 @@ jobs:
         run: pwd
 
       - name: ls
-        run: ls ../built_functions/
+        run: ls ../built_server/
 
       - name: Setup Terraform with specified version on the runner
         uses: hashicorp/setup-terraform@v2
