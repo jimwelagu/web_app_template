@@ -73,7 +73,7 @@ jobs:
         run: ls
 
   terraform:
-    needs: [build_server build_client]
+    needs: [build_server, build_client]
     name: "Terraform"
     runs-on: ubuntu-latest
     defaults:
