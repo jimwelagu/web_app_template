@@ -52,20 +52,20 @@ jobs:
       run:
         shell: bash
         # We keep Script files in the scripts directory.
-        working-directory: ./client/scripts
+        working-directory: ./client
     steps:
       - name: Checkout the repository to the runner
         uses: actions/checkout@v4
       - name: pwd
         run: pwd
       - name: ls before
-        run: ls ../
+        run: ls
       - name: package
-        run: . package.sh
+        run: . scripts/package.sh
       - name: ls after
-        run: ls ../
+        run: ls
       - name: change dir
-        run: cd ../
+        run: cd
       - name: upload
         uses: actions/upload-artifact@v4
         with:
