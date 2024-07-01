@@ -33,12 +33,12 @@ module "react_ui" {
 
 # Output the S3 bucket domain name
 output "s3_bucket_domain_name" {
-  value = module.react_ui.s3_bucket_bucket_regional_domain_name
+  value = module.react_ui.s3_bucket_domain_name
 }
 
 # Output the CloudFront domain name
 output "cloudfront_domain_name" {
-  value = module.react_ui.cloudfront_distribution_domain_name
+  value = module.react_ui.cloudfront_domain_name
 }
 
 # Output the CloudFront distribution ID
