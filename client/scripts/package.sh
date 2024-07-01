@@ -16,7 +16,7 @@ ls ../
 echo ls 3
 ls ../build/
 cd ../build/
-zip -r ${WORKDIR}/../client.zip .
+zip -r ${WORKDIR}/client.zip .
 
 # mkdir dist
 # cp -r ./*.js dist/
