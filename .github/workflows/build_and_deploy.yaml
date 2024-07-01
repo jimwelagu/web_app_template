@@ -190,4 +190,4 @@ jobs:
           aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws_bucket: "us-west-2-new-gql-client"
           source_dir: "built_client/build/"
-          destination_dir: "."
+          destination_dir: ""
