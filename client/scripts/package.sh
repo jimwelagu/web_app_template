@@ -15,13 +15,8 @@ echo ls 2
 ls ../
 echo ls 3
 ls ../build/
-# mkdir dist
-# cp -r ./*.js dist/
-# cp -r ./*.css dist/
-# cp -r ./*.svg dist/
-# ls
-# cd dist
-# zip -r ${WORKDIR}/../add_task_lambda_function.zip .
+cd ../build/
+zip -r ${WORKDIR}/../client.zip .
 
 # mkdir dist
 # cp -r ./*.js dist/
