@@ -80,8 +80,6 @@ jobs:
           retention-days: 1
           path: |
             client.zip
-            /client/build/
-            /build/
           if-no-files-found: error # 'warn' or 'ignore' are also available, defaults to `warn`
 
   terraform:
