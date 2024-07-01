@@ -11,10 +11,10 @@ echo "buiilding"
 npm run build
 pwd
 ls
-mkdir dist
-cp -r ./*.js dist/
-cp -r ./*.css dist/
-cp -r ./*.svg dist/
-ls
+# mkdir dist
+# cp -r ./*.js dist/
+# cp -r ./*.css dist/
+# cp -r ./*.svg dist/
+# ls
 # cd dist
 # zip -r ${WORKDIR}/../add_task_lambda_function.zip .
