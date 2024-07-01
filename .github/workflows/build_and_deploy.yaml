@@ -23,7 +23,7 @@ jobs:
       run:
         shell: bash
         # We keep Script files in the scripts directory.
-        working-directory: ./server/scripts
+        working-directory: ./server/
     steps:
       - name: Checkout the repository to the runner
         uses: actions/checkout@v4
@@ -32,7 +32,7 @@ jobs:
       - name: ls before
         run: ls
       - name: package
-        run: . package.sh
+        run: . scripts/package.sh
       - name: upload
         uses: actions/upload-artifact@v4
         with:
@@ -53,7 +53,7 @@ jobs:
       run:
         shell: bash
         # We keep Script files in the scripts directory.
-        working-directory: ./client
+        working-directory: ./client/
     steps:
       - name: Checkout the repository to the runner
         uses: actions/checkout@v4
