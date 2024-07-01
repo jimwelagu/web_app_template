@@ -1,6 +1,6 @@
 #!/bin/bash
 
-WORKDIR=$(pwd)/..
+WORKDIR=$(pwd)/
 
 cd ${WORKDIR}/functions/addTask
 echo "installing packages"

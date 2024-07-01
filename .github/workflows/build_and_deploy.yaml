@@ -3,8 +3,8 @@ name: "Build and Deploy"
 # on: push
 on:
   push:
-    branches:
-      - main
+    # branches:
+    #   - main
 
 env:
   # verbosity setting for Terraform logs
@@ -16,14 +16,14 @@ env:
   BUCKET_TF_STATE: ${{ secrets.BUCKET_TF_STATE}}
 
 jobs:
-  build:
-    name: "Build Functions"
+  build_server:
+    name: "Build Server"
     runs-on: ubuntu-latest
     defaults:
       run:
         shell: bash
         # We keep Script files in the scripts directory.
-        working-directory: ./server/scripts
+        working-directory: ./server/
     steps:
       - name: Checkout the repository to the runner
         uses: actions/checkout@v4
@@ -32,21 +32,59 @@ jobs:
       - name: ls before
         run: ls
       - name: package
-        run: . package.sh
+        run: . scripts/package.sh
       - name: upload
         uses: actions/upload-artifact@v4
         with:
-          name: built_functions
+          name: built_server
           retention-days: 1
           path: |
             add_task_lambda_function.zip
             post_confirmation_lambda_function.zip
             dist
+          if-no-files-found: error # 'warn' or 'ignore' are also available, defaults to `warn`
       - name: ls after
         run: ls
 
+  build_client:
+    name: "Build Client"
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash
+        # We keep Script files in the scripts directory.
+        working-directory: ./client/
+    steps:
+      - name: Checkout the repository to the runner
+        uses: actions/checkout@v4
+      - name: pwd
+        run: pwd
+      - name: ls before
+        run: ls
+      - name: package
+        run: . scripts/package.sh
+      - name: ls after
+        run: |
+          echo root-dir
+          ls .
+          echo src-dir
+          ls ./src
+          echo scripts-dir
+          ls ./scripts
+          echo build-dir
+          ls ./build
+      - name: upload
+        uses: actions/upload-artifact@v4
+        with:
+          name: built_client
+          retention-days: 1
+          path: |
+            client/client.zip
+            client/build/
+          if-no-files-found: error # 'warn' or 'ignore' are also available, defaults to `warn`
+
   terraform:
-    needs: build
+    needs: [build_server, build_client]
     name: "Terraform"
     runs-on: ubuntu-latest
     defaults:
@@ -66,12 +104,17 @@ jobs:
         run: pwd
 
       - name: ls
-        run: ls ../built_functions/
+        run: |
+          echo server-dir
+          ls ../built_server
+          echo 
+          echo client-dir
+          ls ../built_client
 
       - name: Setup Terraform with specified version on the runner
         uses: hashicorp/setup-terraform@v2
         with:
-          terraform_version: 1.3.0
+          terraform_version: 1.7.5
 
       - name: Terraform init
         id: init
@@ -87,7 +130,7 @@ jobs:
 
       - name: Terraform plan
         id: plan
-        if: github.event_name == 'pull_request'
+        # if: github.event_name == 'pull_request'
         run: terraform plan -no-color -input=false
         continue-on-error: true
 
@@ -123,5 +166,28 @@ jobs:
         run: exit 1
 
       - name: Terraform Apply
-        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        # if: github.ref == 'refs/heads/main' && github.event_name == 'push'
         run: terraform apply -auto-approve -input=false
+
+  upload_client:
+    needs: [terraform, build_client]
+    name: "Upload Client"
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash
+        # We keep Terraform files in the terraform directory.
+        working-directory: ./terraform
+
+    steps:
+      - name: Download Functions
+        uses: actions/download-artifact@v4
+
+      - name: S3 upload
+        uses: shallwefootball/s3-upload-action@master
+        with:
+          aws_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws_bucket: "us-west-2-new-gql-client"
+          source_dir: "built_client/build/"
+          destination_dir: ""

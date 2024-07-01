@@ -15,19 +15,33 @@ provider "aws" {
   region = var.region
 }
 
-resource "aws_instance" "test_instance" {
-  ami           = "ami-830c94e3"
-  instance_type = "t2.nano"
-  tags = {
-    Name = "test_instance"
-  }
-}
-
 module "appsync_api" {
   source                = "./modules/appsync_api"
   region                = var.region
   schema_path           = abspath("../schema.graphql")
   get_task_resolver     = abspath("../server/resolvers/getTasks.js")
-  add_task_zip          = abspath("../built_functions/add_task_lambda_function.zip")
-  post_confirmation_zip = abspath("../built_functions/post_confirmation_lambda_function.zip")
+  add_task_zip          = abspath("../built_server/add_task_lambda_function.zip")
+  post_confirmation_zip = abspath("../built_server/post_confirmation_lambda_function.zip")
+}
+
+module "react_ui" {
+  source      = "./modules/react_ui"
+  region      = var.region
+  bucket_name = "${var.region}-new-gql-client"
+  client_path = abspath("../built_client/build/")
+}
+
+# Output the S3 bucket domain name
+output "s3_bucket_domain_name" {
+  value = module.react_ui.s3_bucket_domain_name
+}
+
+# Output the CloudFront domain name
+output "cloudfront_domain_name" {
+  value = module.react_ui.cloudfront_domain_name
+}
+
+# Output the CloudFront distribution ID
+output "cloudfront_distribution_id" {
+  value = module.react_ui.cloudfront_distribution_id
 }
