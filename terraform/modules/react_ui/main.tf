@@ -113,7 +113,7 @@ module "cloudfront" {
 
 resource "aws_s3_object" "uploaded_object" {
   for_each = fileset(var.client_path, "*")
-  bucket = module.s3_bucket.id
+  bucket = module.s3_bucket.s3_bucket_id
   key    = each.value
   source = "${var.client_path}/${each.value}"
   etag   = filemd5("${var.client_path}/${each.value}")
