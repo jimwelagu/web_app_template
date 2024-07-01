@@ -105,12 +105,6 @@ module "cloudfront" {
   # aliases = ["reactdemo.takemetoprod.com"]
 }
 
-# resource "aws_s3_bucket_object" "directory" {
-#   bucket = var.bucket_name
-#   key    = "base_s3_key"
-#   source = var.client_path
-# }
-
 resource "aws_s3_object" "uploaded_object" {
   for_each = fileset(var.client_path, "*")
   bucket = module.s3_bucket.s3_bucket_id

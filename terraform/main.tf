@@ -28,5 +28,5 @@ module "name" {
   source      = "./modules/react_ui"
   region      = var.region
   bucket_name = "${var.region}-new-gql-client"
-  client_path = abspath("../built_client/")
+  client_path = abspath("../built_client/build/")
 }
