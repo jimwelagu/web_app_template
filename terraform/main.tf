@@ -24,9 +24,24 @@ module "appsync_api" {
   post_confirmation_zip = abspath("../built_server/post_confirmation_lambda_function.zip")
 }
 
-module "name" {
+module "react_ui" {
   source      = "./modules/react_ui"
   region      = var.region
   bucket_name = "${var.region}-new-gql-client"
   client_path = abspath("../built_client/build/")
+}
+
+# Output the S3 bucket domain name
+output "s3_bucket_domain_name" {
+  value = module.react_ui.s3_bucket_bucket_regional_domain_name
+}
+
+# Output the CloudFront domain name
+output "cloudfront_domain_name" {
+  value = module.react_ui.cloudfront_distribution_domain_name
+}
+
+# Output the CloudFront distribution ID
+output "cloudfront_distribution_id" {
+  value = module.react_ui.cloudfront_distribution_id
 }
