@@ -168,3 +168,25 @@ jobs:
       - name: Terraform Apply
         # if: github.ref == 'refs/heads/main' && github.event_name == 'push'
         run: terraform apply -auto-approve -input=false
+
+  upload_client:
+    needs: [terraform, build_client]
+    name: "Upload Client"
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash
+        # We keep Terraform files in the terraform directory.
+        working-directory: ./terraform
+
+    steps:
+      - name: Download Functions
+        uses: actions/download-artifact@v4
+
+      - name: S3 upload
+        uses: shallwefootball/s3-upload-action@master
+        with:
+          aws_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws_bucket: "us-west-2-new-gql-client"
+          source_dir: "built_client"
