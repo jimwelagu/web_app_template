@@ -64,7 +64,10 @@ jobs:
       - name: package
         run: . scripts/package.sh
       - name: ls after
-        run: ls ./build
+        run: |
+          ls ./build
+          echo root
+          ls .
       - name: upload
         uses: actions/upload-artifact@v4
         with:
