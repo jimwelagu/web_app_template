@@ -25,3 +25,8 @@ variable "cloudfront_default_root_object" {
   type        = string
   default     = "index.html"
 }
+
+variable "client_path" {
+  description = "Path to client"
+  type        = string
+}

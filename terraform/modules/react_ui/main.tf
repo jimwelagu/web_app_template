@@ -48,8 +48,6 @@ data "aws_iam_policy_document" "s3_bucket_policy" {
   }
 }
 
-
-
 module "cloudfront" {
   source  = "terraform-aws-modules/cloudfront/aws"
   version = "~> 3.2.0"
@@ -105,5 +103,11 @@ module "cloudfront" {
   # To add an alias you must also add a certificate for that alias in ACM
   # adding certificate is mandatory for aliases - so ignoring this for now 
   # aliases = ["reactdemo.takemetoprod.com"]
+}
+
+resource "aws_s3_bucket_object" "directory" {
+  bucket = var.bucket_name
+  key    = "base_s3_key"
+  source = var.client_path
 }
 
