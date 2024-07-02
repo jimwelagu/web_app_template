@@ -27,7 +27,7 @@ module "appsync_api" {
 module "react_ui" {
   source      = "./modules/react_ui"
   region      = var.region
-  bucket_name = "${var.region}-new-gql-client"
+  bucket_name = "${var.region}-jimwelagu-new-gql-client"
   client_path = abspath("../built_client/build/")
 }
 
