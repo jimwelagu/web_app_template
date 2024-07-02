@@ -6,8 +6,8 @@ type Task {
 }
 
 type TaskConnection {
-	items: [Task!]
-	nextToken: String
+  items: [Task!]
+  nextToken: String
 }
 
 input TaskInput {
